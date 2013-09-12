@@ -1,6 +1,6 @@
 /*jshint asi:true*/
 /*globals angular*/
-angular.module('oauth', ['ui.router', 'accordion'])
+angular.module('oauth', ['ui.router', 'ngAnimate', 'accordion'])
   .run(
     [        '$rootScope', '$state', '$stateParams',
     function ($rootScope,   $state,   $stateParams) {
@@ -29,53 +29,53 @@ angular.module('oauth', ['ui.router', 'accordion'])
       $stateProvider.state('oauth', {
         url: '',
         abstract: true,
-        templateUrl: 'templates/oauth.html',
-        controller: function ($scope, $stateParams) {
-          $scope.requestUrl = function() {
-            // TODO: toTrainCase() ?
-            var consentParams = {
-              clientId: 'client_id',
-              state: 'state',
-              redirectUri: 'redirect_uri'
+        views: {
+          '': {
+            templateUrl: 'templates/oauth.html',
+            controller: function ($scope, $stateParams) {
+              $scope.requestUrl = function() {
+                // TODO: toTrainCase() ?
+                var consentParams = {
+                  clientId: 'client_id',
+                  state: 'state',
+                  redirectUri: 'redirect_uri'
+                }
+
+                return Object.keys(consentParams).filter(function(param) {
+                  return !!$scope.$state[param]
+                }).map(function(param) {
+                  return consentParams[param] + '=' + encodeURIComponent($scope.$state[param])
+                }).join('&')
+              }
+
+              $scope.setHint = function(hint) {
+                $scope.$state.hint = hint
+              }
+
+              $scope.showHint = function(hint) {
+                return $scope.$state.hint === hint
+              }
+            },
+          },
+          'intro@oauth': {
+            templateUrl: 'templates/intro.html',
+            controller: function ($scope, $stateParams) {
             }
-
-            return Object.keys(consentParams).filter(function(param) {
-              return !!$scope.$state[param]
-            }).map(function(param) {
-              return consentParams[param] + '=' + encodeURIComponent($scope.$state[param])
-            }).join('&')
-          }
-
-          $scope.setHint = function(hint) {
-            $scope.$state.hint = hint
-          }
-
-          $scope.showHint = function(hint) {
-            return $scope.$state.hint === hint
+          },
+          'consent-flow@oauth': {
+            templateUrl: 'templates/consent-flow.html',
+            controller: function ($scope, $stateParams) {
+            }
           }
         }
       })
 
       $stateProvider.state('oauth.intro', {
         url: '/intro',
-        views: {
-          'step@oauth': {
-            templateUrl: 'templates/intro.html',
-            controller: function ($scope, $stateParams) {
-            }
-          }
-        }
       })
 
       $stateProvider.state('oauth.consent-flow', {
         url: '/consent-flow',
-        views: {
-          'step@oauth': {
-            templateUrl: 'templates/consent-flow.html',
-            controller: function ($scope, $stateParams) {
-            }
-          }
-        }
       });
   }]
 );

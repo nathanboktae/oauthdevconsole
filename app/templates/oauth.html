@@ -1,7 +1,17 @@
 <header>
   <h1>OAuth Developer Console</h1>
 </header>
-<article ui-view="step"></article>
+<article>
+  <section ng-show="$state.is('oauth.intro')">
+    <h2><a href="#/intro">Getting Started</a></h2>
+    <div class="content" ui-view="intro"></div>
+  </section>
+  <section ng-show="$state.is('oauth.consent-flow')">
+    <h2><a href="#/consent-flow">Consent Flow</a></h2>
+    <div class="content" ui-view="consent-flow"></div>
+  </section>
+  <section></section>
+</article>
 <aside class="hint">
   <div class="client-id required" ng-show="showHint('clientId')">
     <h3>client_id</h3>
@@ -19,6 +29,7 @@
   <h2>Request</h2>
   <div class="request">{{requestUrl()}}</div>
 </aside>
+
 <p>test accordion</p>
 <accordion>
   <panel title="Cats">
