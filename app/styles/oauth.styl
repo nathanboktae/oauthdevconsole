@@ -1,0 +1,54 @@
+base-font = "Segoe UI", "Verdana", "Arial", "sans-serif"
+title-font = "Segoe UI Light", "Helvetica", "Tahoma", "Verdana", "Arial", "sans-serif"
+
+primary-color = #0072c6
+primary-highlight-color = darken(primary-color, 15%)
+//primary-active-highlight-color = lighten(primary-color, 15%)
+link-color = primary-color
+text-color = #333
+inverted-text-color = white
+
+body
+  color text-color 
+  padding 20px 5%
+  font-family base-font
+
+h1, h2, h3
+  font-family title-font
+  margin 0.3em 0
+
+h1
+  font-size 32px
+
+h2
+  font-size 24px
+  text-transform lowercase
+
+h3
+  text-transform uppercase
+  font-size 14px
+  font-weight bold
+
+a, a:visited
+  text-decoration none
+  color primary-color
+  &:hover
+    color primary-highlight-color 
+
+.ng-hide
+  color #777
+
+.ng-show
+  color blue
+
+
+// Metro styling
+ul.accordion
+  > li > h2 a
+    padding 0.2em
+    background-color primary-color
+    color inverted-text-color
+    &:hover, &:focus
+      background-color primary-highlight-color
+  > li.active > h2 a
+    background-color primary-highlight-color

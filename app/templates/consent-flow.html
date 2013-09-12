@@ -1,0 +1,9 @@
+<h2>Consent Flow</h2>
+<form name="consentFlow">
+  <label for="clientId">client_id</label>
+  <input type="text" name="clientId" ng-model="$state.clientId" ng-focus="setHint('clientId')">
+  <label for="state">state</label>
+  <input type="text" name="state" ng-model="$state.state" ng-focus="setHint('state')">
+  <label for="redirectUri">redirect_uri</label>
+  <input type="text" name="redirectUri" ng-model="$state.redirectUri" ng-focus="setHint('redirectUri')">
+</form>

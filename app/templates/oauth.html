@@ -1,0 +1,35 @@
+<header>
+  <h1>OAuth Developer Console</h1>
+</header>
+<article ui-view="step"></article>
+<aside class="hint">
+  <div class="client-id required" ng-show="showHint('clientId')">
+    <h3>client_id</h3>
+    <p>Every application has a string indentifier for it, called a client_id. This is included in every OAuth and DataMarket embedded flow request.</p>
+  </div>
+  <div class="redirect-uri required" ng-show="showHint('redirectUri')">
+    <h3>redirect_uri</h3>
+    <p>Every application needs to specify a URL that datamarket will redirect to with the result of the user's consent flow. Errors in the request are also returned to this url, including if the user declined the consent.</p>
+  </div>
+  <div class="state-param optional" ng-show="showHint('state')"><div>
+    <h3>state</h3>
+    <p>If you need any information returned back to your application when the consent flow is finished, you may provide it here in the <code>state</code> parameter.</p>
+  </aside>
+<aside>
+  <h2>Request</h2>
+  <div class="request">{{requestUrl()}}</div>
+</aside>
+<p>test accordion</p>
+<accordion>
+  <panel title="Cats">
+    <p>meow meow we love felines</p>
+    <img src="http://placekitten.com/200/150" alt="placekitten">
+  </panel>
+  <panel title="Dogs">
+    <p>ruff ruff</p>
+    <img src="http://placedog.com/200/150" alt="placedog">
+  </panel>
+  <panel title="Snakes">
+    <p>snakes on a plane!</p>
+  </panel>
+</accordion>
