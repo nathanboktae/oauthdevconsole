@@ -1,6 +1,6 @@
 /*jshint asi:true*/
 /*globals angular*/
-angular.module('oauth', ['ui.router', 'ngAnimate', 'accordion'])
+angular.module('oauth', ['ui.router', 'ngAnimate'])
   .run(
     [        '$rootScope', '$state', '$stateParams',
     function ($rootScope,   $state,   $stateParams) {
@@ -66,6 +66,11 @@ angular.module('oauth', ['ui.router', 'ngAnimate', 'accordion'])
             templateUrl: 'templates/consent-flow.html',
             controller: function ($scope, $stateParams) {
             }
+          },
+          'access-token@oauth': {
+            templateUrl: 'templates/access-token.html',
+            controller: function ($scope, $stateParams) {
+            }
           }
         }
       })
@@ -73,10 +78,13 @@ angular.module('oauth', ['ui.router', 'ngAnimate', 'accordion'])
       $stateProvider.state('oauth.intro', {
         url: '/intro',
       })
-
       $stateProvider.state('oauth.consent-flow', {
         url: '/consent-flow',
+      })
+      $stateProvider.state('oauth.access-token', {
+        url: '/access-token',
       });
+
   }]
 );
 

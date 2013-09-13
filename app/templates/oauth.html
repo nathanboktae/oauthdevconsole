@@ -10,7 +10,10 @@
     <h2><a href="#/consent-flow">Consent Flow</a></h2>
     <div class="content" ui-view="consent-flow"></div>
   </section>
-  <section></section>
+  <section ng-show="$state.is('oauth.access-token')">
+    <h2><a href="#/access-token">Access Token</a></h2>
+    <div class="content" ui-view="access-token"></div>
+  </section>
 </article>
 <aside class="hint">
   <div class="client-id required" ng-show="showHint('clientId')">
@@ -29,18 +32,3 @@
   <h2>Request</h2>
   <div class="request">{{requestUrl()}}</div>
 </aside>
-
-<p>test accordion</p>
-<accordion>
-  <panel title="Cats">
-    <p>meow meow we love felines</p>
-    <img src="http://placekitten.com/200/150" alt="placekitten">
-  </panel>
-  <panel title="Dogs">
-    <p>ruff ruff</p>
-    <img src="http://placedog.com/200/150" alt="placedog">
-  </panel>
-  <panel title="Snakes">
-    <p>snakes on a plane!</p>
-  </panel>
-</accordion>
