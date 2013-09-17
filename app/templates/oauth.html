@@ -4,15 +4,15 @@
 </header>
 <article>
   <section class="intro" ng-show="$state.is('oauth.intro')">
-    <h2><a href="#/intro">Getting Started</a></h2>
+    <h2><a href="/intro">Getting Started</a></h2>
     <div class="content" ui-view="intro"></div>
   </section>
   <section class="consent-flow" ng-show="$state.is('oauth.consent-flow')">
-    <h2><a href="#/consent-flow">Consent Flow</a></h2>
+    <h2><a href="/consent-flow">Consent Flow</a></h2>
     <div class="content" ui-view="consent-flow"></div>
   </section>
   <section class="access-token" ng-show="$state.is('oauth.access-token')">
-    <h2><a href="#/access-token">Access Token</a></h2>
+    <h2><a href="/access-token">Access Token</a></h2>
     <div class="content" ui-view="access-token"></div>
   </section>
 </article>

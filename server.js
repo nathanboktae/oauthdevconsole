@@ -37,7 +37,7 @@ app.configure('production', function() {
   return app.use(express.errorHandler());
 });
 
-app.get('/', function(req, res) {
+app.get(/\/[a-zA-Z\-\_]*$/, function(req, res) {
   return res.render('index', { layout: false });
 });
 
