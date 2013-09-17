@@ -1,0 +1,15 @@
+{
+    "name": "oauthdevconsole"
+  , "version": "0.1.0"
+  , "private": true
+  , "engines": {
+    "node": "0.10.x"
+  }
+  , "dependencies": {
+      "express": "2.5.8"
+    , "jade": ">= 0.27"
+    , "connect-assets": ">= 2.1.9"
+    , "stylus": ">= 0.31.0"
+    , "nib": ">= 0.9.0"
+  }
+}

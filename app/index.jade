@@ -1,0 +1,19 @@
+!!! 5
+html(lang='en', ng-app='oauth')
+  head
+    meta(charset='utf-8')
+    title OAuth Developer Console - Windows Azure Marketplace
+    link(rel='stylesheet', href='styles/reset.css')
+    link(rel='stylesheet', href='styles/oauth.css')
+    style
+      @font-face { font-family: "Segoe UI"; src: local("Segoe UI"), url(fonts/segoeui.ttf); }
+      @font-face { font-family: "Segoe UI Semibold"; src: local("Segoe UI Semibold"), url(fonts/seguisb.ttf); }
+      @font-face { font-family: "Segoe UI Light"; src: local("Segoe UI Light"), url(fonts/segoeuil.ttf); }
+      @font-face { font-family: "FontAwesome"; src: url(fonts/fontawesome.woff) format("woff"); }
+    script(src='lib/angular/angular.js')
+    script(src='lib/angular/angular-animate.js')
+    script(src='lib/angular/angular-ui-router.js')
+    script(src='scripts/app.js')
+    script
+      if (location.hostname === 'localhost') { document.write('<script src="http://localhost:35729/livereload.js?snipver=1"><' + '/script>') }
+  body(ui-view='')
