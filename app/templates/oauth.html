@@ -1,34 +1,53 @@
 <header>
   <h1>OAuth Developer Console</h1>
+  <p>A playground to test <a href="http://msdn.microsoft.com/en-us/library/windowsazure/gg193416.aspx#WebApps" target="_blank">OAuth authentication</a> for <a href="http://datamarket.azure.com/" target="_blank">Windows Azure Marketplace "DataMarket"</a> datasets and applications</p>
 </header>
 <article>
-  <section ng-show="$state.is('oauth.intro')">
+  <section class="intro" ng-show="$state.is('oauth.intro')">
     <h2><a href="#/intro">Getting Started</a></h2>
     <div class="content" ui-view="intro"></div>
   </section>
-  <section ng-show="$state.is('oauth.consent-flow')">
+  <section class="consent-flow" ng-show="$state.is('oauth.consent-flow')">
     <h2><a href="#/consent-flow">Consent Flow</a></h2>
     <div class="content" ui-view="consent-flow"></div>
   </section>
-  <section ng-show="$state.is('oauth.access-token')">
+  <section class="access-token" ng-show="$state.is('oauth.access-token')">
     <h2><a href="#/access-token">Access Token</a></h2>
     <div class="content" ui-view="access-token"></div>
   </section>
 </article>
-<aside class="hint">
+<aside class="hint" ng-show="$state.hint">
   <div class="client-id required" ng-show="showHint('clientId')">
     <h3>client_id</h3>
     <p>Every application has a string indentifier for it, called a client_id. This is included in every OAuth and DataMarket embedded flow request.</p>
   </div>
-  <div class="redirect-uri required" ng-show="showHint('redirectUri')">
+  <div class="redirect-uri optional" ng-show="showHint('redirectUri')">
     <h3>redirect_uri</h3>
     <p>Every application needs to specify a URL that datamarket will redirect to with the result of the user's consent flow. Errors in the request are also returned to this url, including if the user declined the consent.</p>
+    <p>When you register an application, you will specify a redirect uri then. This paramater is optional and mostly not needed as DataMarket will look up your redirect uri if not specified.</p>
   </div>
-  <div class="state-param optional" ng-show="showHint('state')"><div>
+  <div class="state-param optional" ng-show="showHint('state')">
     <h3>state</h3>
     <p>If you need any information returned back to your application when the consent flow is finished, you may provide it here in the <code>state</code> parameter.</p>
-  </aside>
-<aside>
+  </div>
+  <div class="response-type required" ng-show="showHint('responseType')">
+    <h3>response_type</h3>
+    <p>OAuth allows two types of flows, 3-legged flow that gives back a code, and a 2-legged flow that gives back the access token directly. Windows Azure Marketplace only supports 3-legged with 'code'.</p>
+  </div>
+  <div class="access-code required" ng-show="showHint('accessCode')">
+    <h3>code</h3>
+    <p>The OAuth access code that you recieved back when the user allowed access to their account in the consent flow.</p>
+  </div>
+  <div class="client-secret required" ng-show="showHint('clientSecret')">
+    <h3>client_secret</h3>
+    <p>This is essentially your password for your application - you provide it to Azure ACS to prove you are the application you claim to be. Keep this safe! This site does not in any way store your key.</p>
+  </div>
+  <div class="grant-type required" ng-show="showHint('grantType')">
+    <h3>grant_type</h3>
+    <p>To conform to OAuth 2.0 v13, this must be <code>authorization_code</code></p>
+  </div>
+</aside>
+<aside ng-show="requestUrl()">
   <h2>Request</h2>
   <div class="request">{{requestUrl()}}</div>
 </aside>

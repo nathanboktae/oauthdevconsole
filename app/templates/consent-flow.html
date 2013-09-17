@@ -1,8 +1,30 @@
+<p>Do you need to access all datasets in the user's account, or just a specific dataset?</p>
+<div class="jukebox">
+  <a ng-repeat="perm in ['account', 'specific dataset']" ng-click="$state.permissions = perm" ng-class="{ active: $state.permissions === perm }">{{perm}}</a>
+</div>
 <form name="consentFlow">
-  <label for="clientId">client_id</label>
-  <input type="text" name="clientId" ng-model="$state.clientId" ng-focus="setHint('clientId')">
-  <label for="state">state</label>
-  <input type="text" name="state" ng-model="$state.state" ng-focus="setHint('state')">
-  <label for="redirectUri">redirect_uri</label>
-  <input type="text" name="redirectUri" ng-model="$state.redirectUri" ng-focus="setHint('redirectUri')">
+  <div class="field">
+    <label for="clientId">client_id</label>
+    <input type="text" name="clientId" ng-model="$state.clientId" ng-focus="setHint('clientId')">
+  </div>
+  <div class="field" ng-show="$state.permissions === 'account'">
+    <label>x_permissions</label>
+    <span class="value" ng-focus="setHint('permissions')" ng-mouseover="setHint('permissions')" >account</span>
+  </div>
+  <div class="field" ng-show="$state.permissions === 'specific dataset'">
+    <label for="requiredOffers">x_required_offers</label>
+    <input type="text" name="requiredOffers" ng-model="$state.requiredOffers" ng-focus="setHint('requiredOffers')">
+  </div>
+  <div class="field">
+    <label for="state">state</label>
+    <input type="text" name="state" ng-model="$state.state" ng-focus="setHint('state')">
+  </div>
+  <div class="field">
+    <label for="redirectUri">redirect_uri</label>
+    <input type="text" name="redirectUri" ng-model="$state.redirectUri" ng-focus="setHint('redirectUri')">
+  </div>
+  <div class="field">
+    <label>response_type</label>
+    <span class="value" ng-focus="setHint('responseType')" ng-mouseover="setHint('responseType')" >code</span>
+  </div>
 </form>

@@ -1,5 +1,6 @@
 base-font = "Segoe UI", "Verdana", "Arial", "sans-serif"
 title-font = "Segoe UI Light", "Helvetica", "Tahoma", "Verdana", "Arial", "sans-serif"
+code-font = Consolas,"PT Mono","Andale Mono",Monaco,"Liberation Mono","Courier New",monospace
 
 primary-color = #0072c6
 primary-highlight-color = darken(primary-color, 15%)
@@ -44,6 +45,8 @@ body
   color text-color 
   padding 20px 5%
   font-family base-font
+  @media screen and (min-width: 1000px)
+    padding 20px 35% 10px 10%
 
 h1, h2, h3
   font-family title-font
@@ -67,19 +70,59 @@ a, a:visited
   &:hover
     color primary-highlight-color 
 
+pre, code
+  font-family code-font
+
+body > header
+  margin-bottom: 1em
+  p
+    font-size 14px
+
 step-height = 300px
 step-header-height = 45px
+label-width = 90px
+input-height = 1.7em
+
+icon-size = 32px
+tile-arrow-right = 20px
 
 .content
+   padding 0 20px
   height step-height
 
 article
   flexbox()
+  counter-reset step
   > section
     position relative
+    counter-increment step
     > h2
       transition all linear 300ms
       width step-height
+      margin-bottom: 0.8em
+      &::before
+        content: unquote('counter(step) ')
+        font-size 70%
+        color disabled-color
+        margin-right 0.5em
+    form
+      .field
+        flexbox()
+        margin-bottom: 0.7em
+        line-height: input-height
+        label
+          display inline-block
+          min-width label-width
+          width 35%
+        input
+          height input-height
+          line-height: input-height
+          flex(1)
+    .jukebox
+      margin-bottom 10px
+    a.tile::after
+      right tile-arrow-right + 15px
+
     &:not(.ng-hide)
       flex(1)
     &.ng-hide
@@ -88,8 +131,8 @@ article
       width step-header-height
       > h2
         position absolute
-        transform translatey(40px) rotate(90deg)
-        transform-origin bottom left
+        transform translatey(30px) rotate(90deg)
+        transform-origin left 30px
         width step-height
       .content
         display none
@@ -99,6 +142,55 @@ article
       .content
         display block
         width 100%
+
+a.tile
+  display block
+  background-color primary-color
+  color inverted-text-color
+  padding 20px 15px
+  margin 6px 0
+  transition background-color linear 300ms
+  &:hover, &:focus
+    background-color primary-highlight-color
+    color inverted-text-color
+  &::after
+    content: '\0f061'
+    font-family 'FontAwesome'
+    display block
+    position absolute
+    right tile-arrow-right
+    margin-left: 10px
+    margin-top -(icon-size - 6px)
+    width icon-size
+    height icon-size
+    line-height icon-size
+    text-align center
+    border-radius icon-size
+    border 2px solid inverted-text-color
+
+.jukebox a
+  display inline-block
+  padding 5px 10px
+  border 1px solid primary-color
+  margin-top: .5em
+  &.active
+    background-color primary-color
+    color inverted-text-color  
+
+aside.hint
+  position absolute
+  top 40px
+  right 5%
+  width 20%
+  padding 15px
+  background-color rgba(0, 0, 0, 0.6)
+  color inverted-text-color
+  box-shadow 3px 3px 3px rgba(0, 0, 100, 0.3)
+  p
+    margin-top: 0.5em
+    line-height 1.2em
+  @media screen and (min-width: 1000px)
+    right 12%
 
 /*.ng-hide-add, 
 .ng-hide-remove 
@@ -122,14 +214,3 @@ article
   .content
     transform translatex(100%)
 */
-
-// Metro styling
-ul.accordion
-  > li > h2 a
-    padding 0.2em
-    background-color primary-color
-    color inverted-text-color
-    &:hover, &:focus
-      background-color primary-highlight-color
-  > li.active > h2 a
-    background-color primary-highlight-color

@@ -11,19 +11,16 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
       // to active whenever 'contacts.list' or one of its decendents is active.
       $rootScope.$state = $state;
       $rootScope.$stateParams = $stateParams;
-      $state.hint = 'lala'
+
+      $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
+        $state.hint = ''
+      })
     }])
 .config(
   [          '$stateProvider', '$urlRouterProvider',
     function ($stateProvider,   $urlRouterProvider) {
 
-      // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
       $urlRouterProvider
-
-        // The `when` method says if the url is ever the 1st param, then redirect to the 2nd param
-        // Here we are just setting up some convenience urls.
-        //.when('/user/:id', '/contacts/:id')
-
         .otherwise('/intro');
 
       $stateProvider.state('oauth', {
@@ -59,18 +56,12 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
           },
           'intro@oauth': {
             templateUrl: 'templates/intro.html',
-            controller: function ($scope, $stateParams) {
-            }
           },
           'consent-flow@oauth': {
             templateUrl: 'templates/consent-flow.html',
-            controller: function ($scope, $stateParams) {
-            }
           },
           'access-token@oauth': {
             templateUrl: 'templates/access-token.html',
-            controller: function ($scope, $stateParams) {
-            }
           }
         }
       })

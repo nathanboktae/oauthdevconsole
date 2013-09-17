@@ -1,8 +1,18 @@
 <form name="accessToken">
-  <label for="clientId">client_id</label>
-  <input type="text" name="clientId" ng-model="$state.clientId" ng-focus="setHint('clientId')" required>
-  <label for="clientSecret">client_secret</label>
-  <input type="text" name="clientSecret" ng-model="$state.clientSecret" ng-focus="setHint('clientSecret')" required>
-  <label for="accessCode">code</label>
-  <input type="text" name="accessCode" ng-model="$state.accessCode" ng-focus="setHint('accessCode')">
+  <div class="field">
+    <label for="clientId">client_id</label>
+    <input type="text" name="clientId" ng-model="$state.clientId" ng-focus="setHint('clientId')" required>
+  </div>
+  <div class="field">
+    <label for="clientSecret">client_secret</label>
+    <input type="text" name="clientSecret" ng-model="$state.clientSecret" ng-focus="setHint('clientSecret')" required>
+  </div>
+  <div class="field">
+    <label for="accessCode">code</label>
+    <input type="text" name="accessCode" ng-model="$state.accessCode" ng-focus="setHint('accessCode')">
+  </div>
+  <div class="field">
+    <label>grant_type</label>
+    <span class="value" ng-focus="setHint('grantType')" ng-mouseover="setHint('grantType')" >authorization_code</span>
+  </div>
 </form>
