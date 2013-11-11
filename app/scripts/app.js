@@ -13,7 +13,7 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
 
   $urlRouterProvider.otherwise('/intro')
 
-  $locationProvider.html5Mode(true)
+  $locationProvider.html5Mode(false)
 
   $stateProvider.state('oauth', {
     url: '',
@@ -68,12 +68,3 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
     url: '/access-token',
   })
 })
-
-/*angular.module('phonecat', []).
-  config(['$routeProvider', function($routeProvider) {
-  $routeProvider.
-      when('/phones', {templateUrl: 'partials/phone-list.html',   controller: PhoneListCtrl}).
-      when('/phones/:phoneId', {templateUrl: 'partials/phone-detail.html', controller: PhoneDetailCtrl}).
-      otherwise({redirectTo: '/phones'});
-}]);
-*/
