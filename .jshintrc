@@ -1,0 +1,26 @@
+{
+    "asi": true,
+    "bitwise": true,
+    "browser": true,
+    "camelcase": true,
+    "curly": false,
+    "eqeqeq": true,
+    "eqnull": true,
+    "es5": true,
+    "expr": true,
+    "globalstrict": false,
+    "immed": false,
+    "indent": 2,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "nonew": true,
+    "quotmark": "single",
+    "trailing": true,
+    "undef": true,
+    "unused": true,
+
+    "globals": {
+        "define": true
+    }
+}
