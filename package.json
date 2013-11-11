@@ -12,4 +12,9 @@
     , "stylus": ">= 0.31.0"
     , "nib": ">= 0.9.0"
   }
+  , "devDependencies": {
+      "mocha": ">= 1.13.0"
+    , "chai": ">= 1.8.0"
+    , "mocha-phantomjs": ">= 3.1.6"
+  }
 }
