@@ -46,6 +46,12 @@
     <h3>grant_type</h3>
     <p>To conform to OAuth 2.0 v13, this must be <code>authorization_code</code></p>
   </div>
+  <div class="requiredOffers optional" ng-show="showHint('requiredOffers')">
+    <h3>x_required_offers</h3>
+    <p>Specify which dataset you require here (only one is supported currently) by using the root path from the service URL. You can get this from a couple of places:</p>
+    <pre>https://datamarket.azure.com/dataset/<b>{provider}/{dataset}</b></pre>
+    <pre>https://api.datamarket.azure.com/<b>{provider}/{dataset}</b>/v1</pre>
+  </div>
 </aside>
 <aside ng-show="requestUrl()">
   <h2>Request</h2>

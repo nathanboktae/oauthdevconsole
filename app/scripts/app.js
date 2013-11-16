@@ -13,7 +13,7 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
 
   $urlRouterProvider.otherwise('/intro')
 
-  $locationProvider.html5Mode(false)
+  $locationProvider.html5Mode(true)
 
   $stateProvider.state('oauth', {
     url: '',
