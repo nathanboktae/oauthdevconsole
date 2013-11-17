@@ -6,42 +6,56 @@ describe('OAuth Dev Console', function() {
     inject(function ($state, $rootScope, $httpBackend, $location) {
       stateProv = $state
       rootScope = $rootScope
-      scope = $rootScope.$new();
       $httpBackend.when('GET', /templates/).respond('<div>hi</div>')
       loc = $location
-      //controller = $controller( ApplicationController, { $scope: scope});
     })
   })
 
-  it('should work kinda', function(done) {
+  xit('oauth.intro should map to /intro', function() {
     stateProv.go('oauth.intro')
     rootScope.$digest()
     loc.$$path.should.equal('/intro')
-    done()
   })
 
-    // var scope, ctrl, $httpBackend
+  xit('oauth.consent-flow should map to /consent-flow', function() {
+    loc.path('/consent-flow')
+    rootScope.$digest()
+    stateProv.current.name.should.equal('oauth.consent-flow')
+  })
 
-    // beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
-    //   $httpBackend = _$httpBackend_
-    //   $httpBackend.expectGET('phones/phones.json').
-    //       respond([{name: 'Nexus S'}, {name: 'Motorola DROID'}])
+  describe('OAuth controller', function() {
+    beforeEach(function() {
+      scope = rootScope.$new()
+      stateProv.get('oauth').views[''].controller(scope)
+    })
 
-    //   scope = $rootScope.$new()
-    //   ctrl = $controller(PhoneListCtrl, {$scope: scope});
-    // }))
+    it('setHint should save the hint on the $state', function() {
+      scope.setHint('foo')
+      scope.$state.hint.should.equal('foo')
+    })
 
+    it('showHint should be true only if the current hint is what is queried', function() {
+      scope.setHint('foo')
+      scope.showHint('foo').should.be.true
+      scope.showHint('baz').should.be.false
+    })
 
-    // it('should create "phones" model with 2 phones fetched from xhr', function() {
-    //   expect(scope.phones).toBeUndefined()
-    //   $httpBackend.flush()
+    describe('requestUrl', function() {
+      it('should be empty if no state params are set', function() {
+        scope.requestUrl().should.be.empty
+      })
 
-    //   expect(scope.phones).toEqual([{name: 'Nexus S'},
-    //                                {name: 'Motorola DROID'}])
-    // })
+      it('should build up a string of only params that are set', function() {
+        scope.$state.clientId = 'DallasOfficeAddIn'
+        scope.$state.clientSecret = 'secretpassword'
+        scope.requestUrl().should.equal('client_id=DallasOfficeAddIn&client_secret=secretpassword')
+      })
 
-
-    // it('should set the default value of orderProp model', function() {
-    //   expect(scope.orderProp).toBe('age')
-    // })
+      it('should encode parameters', function() {
+        scope.$state.clientId = 'DallasOfficeAddIn'
+        scope.$state.requiredOffers = 'Bing/Search'
+        scope.requestUrl().should.equal('client_id=DallasOfficeAddIn&x_required_offers=Bing%2FSearch')
+      })
+    })
+  })
 })

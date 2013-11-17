@@ -21,13 +21,15 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
     views: {
       '': {
         templateUrl: 'templates/oauth.html',
-        controller: function ($scope, $stateParams) {
+        controller: function ($scope) {
           $scope.requestUrl = function() {
             // TODO: toTrainCase() ?
             var consentParams = {
               clientId: 'client_id',
               state: 'state',
-              redirectUri: 'redirect_uri'
+              redirectUri: 'redirect_uri',
+              requiredOffers: 'x_required_offers',
+              clientSecret: 'client_secret'
             }
 
             return Object.keys(consentParams).filter(function(param) {
