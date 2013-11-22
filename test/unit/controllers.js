@@ -58,4 +58,45 @@ describe('OAuth Dev Console', function() {
       })
     })
   })
+
+  describe('intro scenario', function() {
+    beforeEach(function() {
+      scope = rootScope.$new()
+      stateProv.get('oauth').views['intro@oauth'].controller(scope, scope.$state)
+    })
+
+    it('should clear state values when the scenario is user supplied (null)', function() {
+      scope.$state.clientId = 'MyAppId'
+      scope.$state.clientSecret = 'shhhsecret'
+      scope.$state.state = 'active'
+      scope.$state.xScope = 'http://api.microsofttranslator.com/'
+      scope.$state.somethingelse = 'foobar'
+
+      scope.scenario(null)
+
+      scope.$state.should.not.contain.keys(['cliendId', 'clientSecret', 'state', 'xScope'])
+    })
+
+    it('should set client id, secret, and required offers for the sample scenario', function() {
+      scope.$state.state = 'active'
+      scope.$state.xScope = 'http://api.microsofttranslator.com/'
+
+      scope.scenario('sample')
+
+      scope.$state.clientId.should.equal('OAuthDeveloperConsole')
+      scope.$state.clientSecret.should.equal('thissecretisnotsecret')
+      scope.$state.should.not.contain.keys(['state', 'xScope'])
+      scope.$state.should.contain.keys(['redirectUri', 'requiredOffers'])
+    })
+
+    it('should set client id, secret, x-scope, and required offers in the Microsoft Translator scenario', function() {
+      scope.scenario('translator')
+
+      scope.$state.clientId.should.equal('OAuthDeveloperConsole')
+      scope.$state.clientSecret.should.equal('thissecretisnotsecret')
+      scope.$state.xScope.should.equal('http://api.microsofttranslator.com/')
+      scope.$state.should.not.contain.keys(['state', 'xScope'])
+      scope.$state.should.contain.keys(['redirectUri', 'requiredOffers'])
+    })
+  })
 })

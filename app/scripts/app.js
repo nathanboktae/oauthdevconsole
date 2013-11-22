@@ -50,6 +50,28 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
       },
       'intro@oauth': {
         templateUrl: 'templates/intro.html',
+        controller: function($scope, $state) {
+          $scope.scenario = function(scenario) {
+            if (scenario) {
+              $state.clientId = 'OAuthDeveloperConsole'
+              $state.clientSecret = 'thissecretisnotsecret'
+              $state.redirectUri = 'http://oauthdevconsole.azurewebsites.net/consent-flow-result'
+              if (scenario === 'translator') {
+                $state.requiredOffers = 'Bing/MicrosoftTranslator'
+                $state.xScope = 'http://api.microsofttranslator.com/'
+              } else {
+                $state.requiredOffers = 'data.cov/crimes';
+                delete $state.xScope
+              }
+            } else {
+              delete $state.clientId;
+              delete $state.clientSecret;
+              delete $state.requiredOffers;
+              delete $state.xScope;
+            }
+            delete $state.state
+          }
+        }
       },
       'consent-flow@oauth': {
         templateUrl: 'templates/consent-flow.html',
@@ -61,7 +83,7 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
   })
 
   $stateProvider.state('oauth.intro', {
-    url: '/intro',
+    url: '/intro'
   })
   $stateProvider.state('oauth.consent-flow', {
     url: '/consent-flow',
