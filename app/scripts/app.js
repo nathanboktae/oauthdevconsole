@@ -9,6 +9,11 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
         $state.hint = ''
       })
     })
+.filter('trustAsHtml', function ($sce) {
+  return function (input) {
+    return $sce.trustAsHtml(input);
+  }
+})
 .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
   $urlRouterProvider.otherwise('/intro')
@@ -68,6 +73,7 @@ angular.module('oauth', ['ui.router', 'ngAnimate'])
               delete $state.clientSecret;
               delete $state.requiredOffers;
               delete $state.xScope;
+              delete $state.redirectUri;
             }
             delete $state.state
           }

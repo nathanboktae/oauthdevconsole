@@ -55,5 +55,5 @@
 </aside>
 <aside ng-show="requestUrl()">
   <h2>Request</h2>
-  <pre class="request" ng-bind-html="requestUrl()"></pre>
+  <pre class="request" ng-bind-html="requestUrl() | trustAsHtml"></pre>
 </aside>
