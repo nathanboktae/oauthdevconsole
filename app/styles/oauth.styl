@@ -4,8 +4,9 @@ code-font = Consolas,"PT Mono","Andale Mono",Monaco,"Liberation Mono","Courier N
 
 primary-color = #0072c6
 primary-highlight-color = darken(primary-color, 15%)
+secondary-color = #C6005F
 //primary-active-highlight-color = lighten(primary-color, 15%)
-accent-color = #eee
+background-accent-color = #eee
 link-color = primary-color
 text-color = #333
 inverted-text-color = white
@@ -76,8 +77,14 @@ pre, code
 
 pre.request
   white-space normal
-  background-color accent-color
+  background-color background-accent-color
   padding 8px 5px
+  .key
+    color secondary-color
+  .value
+    color primary-color
+  .highlight
+    background-color yellow
 
 body > header
   margin-bottom: 1em

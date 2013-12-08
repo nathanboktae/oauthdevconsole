@@ -1,6 +1,6 @@
 <p>Do you need to access all datasets in the user's account, or just a specific dataset?</p>
 <div class="jukebox">
-  <a ng-repeat="perm in ['account', 'specific dataset']" ng-click="$state.permissions = perm" ng-class="{ active: $state.permissions === perm }">{{perm}}</a>
+  <a ng-repeat="perm in permissions" ng-click="$state.permissions = perm.value" ng-class="{ active: $state.permissions === perm.value }">{{perm.description}}</a>
 </div>
 <form name="consentFlow">
   <div class="field">

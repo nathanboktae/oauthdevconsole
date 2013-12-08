@@ -21,6 +21,6 @@
     "unused": true,
 
     "globals": {
-        "define": true
+        "angular": false
     }
 }

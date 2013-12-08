@@ -26,7 +26,7 @@ describe('OAuth Dev Console', function() {
   describe('OAuth controller', function() {
     beforeEach(function() {
       scope = rootScope.$new()
-      stateProv.get('oauth').views[''].controller(scope)
+      stateProv.get('oauth').views[''].controller(scope, scope.$state)
     })
 
     it('setHint should save the hint on the $state', function() {
@@ -41,20 +41,38 @@ describe('OAuth Dev Console', function() {
     })
 
     describe('requestUrl', function() {
-      it('should be empty if no state params are set', function() {
-        scope.requestUrl().should.be.empty
-      })
+      describe('params', function() {
+        it('should be empty if no state params are set', function() {
+          scope.requestUrl().params.should.be.empty
+        })
 
-      it('should build up a string of only params that are set', function() {
-        scope.$state.clientId = 'DallasOfficeAddIn'
-        scope.$state.clientSecret = 'secretpassword'
-        scope.requestUrl().should.equal('client_id=DallasOfficeAddIn&client_secret=secretpassword')
-      })
+        it('should build up a string of only params that are set', function() {
+          scope.$state.clientId = 'DallasOfficeAddIn'
+          scope.$state.clientSecret = 'secretpassword'
+          scope.requestUrl().params.should.deep.equal([{
+            key: 'client_id',
+            value: 'DallasOfficeAddIn',
+            highlight: false
+          }, {
+            key: 'client_secret',
+            value: 'secretpassword',
+            highlight: false
+          }])
+         })
 
-      it('should encode parameters', function() {
-        scope.$state.clientId = 'DallasOfficeAddIn'
-        scope.$state.requiredOffers = 'Bing/Search'
-        scope.requestUrl().should.equal('client_id=DallasOfficeAddIn&x_required_offers=Bing%2FSearch')
+        it('should encode parameters', function() {
+          scope.$state.clientId = 'DallasOfficeAddIn'
+          scope.$state.requiredOffers = 'Bing/Search'
+          scope.requestUrl().params.should.deep.equal([{
+            key: 'client_id',
+            value: 'DallasOfficeAddIn',
+            highlight: false
+          }, {
+            key: 'x_required_offers',
+            value: 'Bing%2FSearch',
+            highlight: false
+          }])
+        })        
       })
     })
   })

@@ -52,8 +52,16 @@
     <pre>https://datamarket.azure.com/dataset/<b>{provider}/{dataset}</b></pre>
     <pre>https://api.datamarket.azure.com/<b>{provider}/{dataset}</b>/v1</pre>
   </div>
+  <div class="permissions optional" ng-show="showHint('permissions')">
+    <h3>x_permissions</h3>
+    <p>Specify the permissions to the user's account your app is requesting. Two access levels are supported:</p>
+    <ol>
+      <li><code>account</code> to access all the user's datasets</li>
+      <li>a specific dataset, the same one specified by <code>x_required_offers</code>. In this case, <code>x_permissions</code> is optional.</li>
+    </ol>
+  </div>
 </aside>
 <aside ng-show="requestUrl()">
   <h2>Request</h2>
-  <pre class="request" ng-bind-html="requestUrl() | trustAsHtml"></pre>
+  <pre class="request"><span class="root">{{requestUrl().root}}</span>?<span class="kvp" ng-repeat="param in requestUrl().params" ng-class="{ highlight: param.highlight }"><span class="key">{{param.key}}</span>=<span class="value">{{param.value}}</span>&amp;</span></pre>
 </aside>
